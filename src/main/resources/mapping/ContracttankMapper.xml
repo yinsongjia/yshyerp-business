@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.business.mapper.ContracttankMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.business.entity.Contracttank">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="id" property="key" jdbcType="INTEGER"/>
+        <result column="billid" property="billid" jdbcType="INTEGER"/>
+        <result column="showid" property="showid" jdbcType="INTEGER"/>
+        <result column="tank" property="tank" jdbcType="CHAR"/>
+        <result column="commodity" property="commodity" jdbcType="CHAR"/>
+        <result column="min_input" property="minInput" jdbcType="NUMERIC"/>
+        <result column="remarks" property="remarks" jdbcType="CHAR"/>
+        <result column="D" property="d" jdbcType="CHAR"/>
+    </resultMap>
+    <insert id="addContracttank">
+
+    </insert>
+    <update id="updateContracttank">
+
+    </update>
+    <update id="delete">
+        <foreach collection="list" separator="" item="val">
+    update contracttank set D='D' where id =#{val}
+        </foreach>
+    </update>
+
+
+    <select id="getContracttank" resultMap="BaseResultMap">
+        SELECT * from contracttank where billid='' and ISNULL(d,' ')=' '
+        <if test="commodity!=null and commodity!=''">
+            and commodity=#{commodity}
+        </if>
+        <if test="tank!=null and tank!=''">
+            and tank=#{tank}
+        </if>
+        order by showid,id
+    </select>
+    <select id="qyery" resultType="com.yshyerp.business.response.dto.DropDownBoxDTO">
+        select tank as [value] ,tank [key] from tank group by tank
+    </select>
+    <select id="getContracttankById" resultType="com.yshyerp.business.entity.Contracttank">
+        SELECT * from contracttank where billid=#{billid} and ISNULL(d,' ')=' '
+    </select>
+
+</mapper>

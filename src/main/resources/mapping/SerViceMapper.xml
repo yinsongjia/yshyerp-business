@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.business.mapper.SerViceMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.business.entity.SerVice">
+        <id column="ServiceID" property="serviceid" jdbcType="VARCHAR"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Unit" property="unit" jdbcType="CHAR"/>
+        <result column="Price" property="price" jdbcType="NUMERIC"/>
+        <result column="PriceUnit" property="priceunit" jdbcType="CHAR"/>
+        <result column="IsDefault" property="isdefault" jdbcType="BIT"/>
+        <result column="IsTank" property="istank" jdbcType="BIT"/>
+        <result column="IsShip" property="isship" jdbcType="BIT"/>
+        <result column="ChargeType" property="chargetype" jdbcType="INTEGER"/>
+        <result column="OrderFace" property="orderface" jdbcType="INTEGER"/>
+        <result column="ChargeClass" property="chargeclass" jdbcType="INTEGER"/>
+        <result column="State" property="state" jdbcType="INTEGER"/>
+        <result column="Remark" property="remark" jdbcType="CHAR"/>
+        <result column="D" property="d" jdbcType="CHAR"/>
+        <result column="SAPServiceCode" property="sapservicecode" jdbcType="CHAR"/>
+    </resultMap>
+    <select id="getService" resultMap="BaseResultMap">
+        select * from service where 1=1 and ISNULL(d,' ')=' '
+        <if test="serviceid!=null">
+            and serviceid=#{serviceid}
+        </if>
+        <if test="name!=null">
+            and name=#{name}
+        </if>
+    </select>
+    <select id="qyery" resultType="com.yshyerp.business.response.dto.DropDownBoxDTO">
+        select serviceid, name as [value] from service order by serviceid,name
+    </select>
+    <insert id="addService">
+        INSERT INTO
+        service(D,ServiceID,Name,Unit,Price,PriceUnit,IsDefault,IsTank,IsShip,ChargeType,OrderFace,ChargeClass,State
+        ,Remark)
+        VALUES
+        ('',#{serVice.serviceid},#{serVice.name},#{serVice.unit},#{serVice.price},#{serVice.priceunit},#{serVice.isdefault},#{serVice.istank},#{serVice.isship},#{serVice.chargetype},#{serVice.orderface},
+        #{serVice.chargeclass},#{serVice.state},#{serVice.remark})
+    </insert>
+
+    <update id="deleteService">
+        <foreach collection="list" separator="" item="val">
+            update service set d='D' where ServiceID=#{val}
+        </foreach>
+
+    </update>
+    <update id="updateservice">
+        update service set Name=#{name},Unit=#{unit},Price=#{price}
+        ,PriceUnit=#{priceunit},IsDefault=#{isdefault},IsTank=#{istank},IsShip=#{isship},ChargeType=#{chargetype},OrderFace=#{orderface}
+        ,ChargeClass=#{chargeclass},State=#{state},Remark=#{remark},D=#{d}
+        where ServiceID=#{serviceid}
+    </update>
+</mapper>

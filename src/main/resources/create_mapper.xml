@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="mySqlTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--中远数据库链接URL，用户名、密码 -->
+<!--        <jdbcConnection-->
+<!--                driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
+<!--                connectionURL="jdbc:sqlserver://10.208.2.7;databaseName=invdbf"-->
+<!--                userId="yiliu01"-->
+<!--                password="87654321">-->
+<!--        </jdbcConnection>-->
+
+        <!--数据库链接URL，用户名、密码 -->
+<!--                连接外网数据库-->
+<!--                <jdbcConnection-->
+<!--                        driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
+<!--                        connectionURL="jdbc:sqlserver://smartflow.diskstation.me:8086;databaseName=invdbf"-->
+<!--                        userId="sa"-->
+<!--                        password="1qaz@wsx">-->
+<!--                </jdbcConnection>-->
+
+        <!--        公司的数据库-->
+               <jdbcConnection
+                      driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                      connectionURL="jdbc:sqlserver://192.168.1.252;databaseName=invdbf"
+                       userId="sa"
+                       password="1qaz@wsx">
+
+               </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--pojo生成位置 -->
+        <javaModelGenerator
+                targetPackage="com.yshyerp.business.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--映射文件生成位置 -->
+        <sqlMapGenerator targetPackage="mapping"
+                         targetProject="src/main/resources/">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--dao生成位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.yshyerp.business.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <!--        <table tableName="Service" domainObjectName="SerVice"-->
+        <!--        enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--        enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--        selectByExampleQueryId="false"></table>-->
+
+        <!-- tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <!--        <table tableName="contract" domainObjectName="Contract"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false"></table>-->
+        <!-- tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <!--    <table tableName="contracttank" domainObjectName="Contracttank"-->
+        <!--           enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--           enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--           selectByExampleQueryId="false"></table>-->
+        <!-- tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <!--        <table tableName="commodity" domainObjectName="Commodity"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false"></table>-->
+        <!-- tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+<!--        <table tableName="contractlist" domainObjectName="Contractlist"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"></table>-->
+
+        <!-- tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="Vw_amount" domainObjectName="vw_amount"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>

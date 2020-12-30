@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.business.mapper.ContractMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.business.entity.Contract">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="id" property="key" jdbcType="INTEGER"/>
+        <result column="contract_i" property="contractI" jdbcType="CHAR"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="customer" property="customer" jdbcType="CHAR"/>
+        <result column="st_date" property="stDate" jdbcType="DATE"/>
+        <result column="en_date" property="enDate" jdbcType="DATE"/>
+        <result column="chk_date" property="chkDate" jdbcType="DATE"/>
+        <result column="con_long" property="conLong" jdbcType="CHAR"/>
+        <result column="tank" property="tank" jdbcType="CHAR"/>
+        <result column="commodity" property="commodity" jdbcType="CHAR"/>
+        <result column="min_input" property="minInput" jdbcType="NUMERIC"/>
+    </resultMap>
+    <insert id="addContract"></insert>
+    <update id="updateContract">
+
+    </update>
+
+    <update id="deleteContract">
+        <foreach collection="list" separator="" item="val">
+            update contract set d='D' where id=#{val}
+        </foreach>
+
+    </update>
+
+    <update id="updateByIdshenhe">
+        <foreach collection="list" separator="" item="val">
+            update contract set state=10 where id=#{val}
+        </foreach>
+
+    </update>
+    <update id="updateByIdzuofe">
+        <foreach collection="list" separator="" item="val">
+            update contract set state=1 where id=#{val}
+        </foreach>
+    </update>
+    <update id="updateByIdyishenhe">
+ <foreach collection="list" separator="" item="val">
+     update contract set state=0 where id=#{val}
+ </foreach>
+    </update>
+    <update id="updateByIdyiwancheng">
+        <foreach collection="list" separator="" item="val">
+            update contract set state=100 where id=#{val}
+        </foreach>
+    </update>
+
+    <select id="getContract" resultMap="BaseResultMap">
+        select * from contract where 1=1 and ISNULL(d,' ')=' '
+        <if test="contractI!=null and contractI!=''">
+            and contract_i=#{contractI}
+        </if>
+        <if test="customer!=null and customer!=''">
+            and customer=#{customer}
+        </if>
+        <if test="stateList!=null and stateList!=''">
+            and state in
+            <foreach item="state" index="index" collection="stateList"
+                     open="(" separator="," close=")">
+                 #{state}
+            </foreach>
+        </if>
+        -- order by id
+    </select>
+    <select id="getServiceContractListByBillId" resultType="com.yshyerp.business.response.dto.ServiceContractListDTO">
+        SELECT
+        a.billid,b.name,a.serviceid,a.price,a.miniquan,a.freequan,a.isnum,a.istax,a.taxrate,a.tank,a.remarks,b.unit,b.istank,b.chargetype,a.id
+        ,a.showid from contractlist a,service b where a.billid=#{billid} and a.serviceid=b.serviceid and ISNULL(a.d,'
+        ')=' ' order by showid,a.id
+    </select>
+    <select id="query" resultType="com.yshyerp.business.response.dto.DropDownBoxDTO">
+
+    </select>
+
+
+</mapper>

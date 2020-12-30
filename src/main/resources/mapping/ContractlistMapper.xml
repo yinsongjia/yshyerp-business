@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.business.mapper.ContractlistMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.business.entity.Contractlist">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="id" property="key" jdbcType="INTEGER"/>
+        <result column="billid" property="billid" jdbcType="INTEGER"/>
+        <result column="showid" property="showid" jdbcType="INTEGER"/>
+        <result column="serviceid" property="serviceid" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="miniquan" property="miniquan" jdbcType="NUMERIC"/>
+        <result column="freequan" property="freequan" jdbcType="NUMERIC"/>
+        <result column="istax" property="istax" jdbcType="BIT"/>
+        <result column="taxrate" property="taxrate" jdbcType="NUMERIC"/>
+        <result column="isnum" property="isnum" jdbcType="BIT"/>
+        <result column="tank" property="tank" jdbcType="CHAR"/>
+        <result column="remarks" property="remarks" jdbcType="CHAR"/>
+        <result column="D" property="d" jdbcType="CHAR"/>
+    </resultMap>
+    <insert id="addContractlist">
+
+    </insert>
+    <update id="updateContractlist">
+
+    </update>
+    <update id="deleteContractlist">
+        <foreach collection="list" separator="" item="val">
+            update contractlist set D='D' where id =#{val}
+        </foreach>
+
+
+    </update>
+    <select id="getContractlist" resultMap="BaseResultMap">
+       select * from contractlist where D='' and ISNULL(d,' ')=' ' order by id
+-- SELECT a.billid,b.name,a.serviceid,a.price,a.miniquan,a.freequan,a.isnum,a.istax,a.taxrate,a.tank,a.remarks,b.unit,b.istank,b.chargetype,a.id ,a.showid from contractlist a,service b  where a.billid='27'
+-- and a.serviceid=b.serviceid and ISNULL(a.d,' ')=' ' order by showid,a.id
+    </select>
+    <select id="query" resultType="com.yshyerp.business.response.dto.DropDownBoxDTO">
+  SELECT name as [value], name as [key],serviceid,unit,price,chargetype,istank  FROM service WHERE ISNULL(d,' ')=' ' order by serviceid
+
+    </select>
+    <select id="getServiceContractList" resultType="com.yshyerp.business.request.dto.ContractserviceReqVO">
+        SELECT a.billid,b.name,a.serviceid,a.price,a.miniquan,a.freequan,a.isnum,a.istax,a.taxrate,a.tank,a.remarks,b.unit,b.istank,b.chargetype,a.id ,a.showid from contractlist a,service b
+         where a.billid=#{billid} and a.serviceid=b.serviceid and ISNULL(a.d,' ')=' ' order by showid,a.id
+    </select>
+
+</mapper>

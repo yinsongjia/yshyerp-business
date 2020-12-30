@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.business.mapper.CommodityMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.business.entity.Commodity">
+        <result column="code" property="code" jdbcType="CHAR"/>
+        <result column="commodity" property="commodity" jdbcType="CHAR"/>
+        <result column="fullname" property="fullname" jdbcType="CHAR"/>
+        <result column="cname" property="cname" jdbcType="CHAR"/>
+        <result column="density" property="density" jdbcType="DECIMAL"/>
+        <result column="comm_code" property="commCode" jdbcType="CHAR"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="wx" property="wx" jdbcType="BIT"/>
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="order1" property="order1" jdbcType="DECIMAL"/>
+        <result column="flash" property="flash" jdbcType="DECIMAL"/>
+        <result column="nature" property="nature" jdbcType="CHAR"/>
+        <result column="type" property="type" jdbcType="CHAR"/>
+    </resultMap>
+    <select id="qyery" resultType="com.yshyerp.business.response.dto.DropDownBoxDTO">
+        select commodity as [value],commodity as [key] from commodity group by commodity;
+    </select>
+
+</mapper>
